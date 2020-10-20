@@ -2,7 +2,6 @@
 
 <q-layout class="flex flex-center">
    <div class="q-pa-md" style=" width: 400px">
-
     <q-form
       @submit="onSubmit"
       @reset="onReset"
@@ -78,6 +77,17 @@ export default {
       this.accept = false
     }
   },
+
+  computed:{
+    count: {
+      get () {
+        return this.$store.state.auth.count
+      },
+      set () {
+        this.$store.commit('auth/increment')
+      }
+    }
+  }
 }
 </script>
 

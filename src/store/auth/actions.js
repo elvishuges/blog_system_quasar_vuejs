@@ -1,5 +1,4 @@
-/*
-export function someAction (context) {
 
+export function increment(context) {
+  context.commit('increment')
 }
-*/

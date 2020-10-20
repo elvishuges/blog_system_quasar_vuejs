@@ -3,7 +3,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          Todo List
+          feed
         </q-toolbar-title>
         <div></div>
       </q-toolbar>
@@ -62,6 +62,7 @@ const linksData = [
 ]
 
 export default {
+
   name: 'MainLayout',
   data () {
     return {
