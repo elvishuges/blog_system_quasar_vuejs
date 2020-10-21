@@ -33,4 +33,5 @@ export default function (/* { ssrContext } */) {
   }
 
   return Store
+
 }
