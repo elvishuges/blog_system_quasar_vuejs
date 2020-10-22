@@ -1,11 +1,12 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar  class="bg-white text-grey">
-        <q-btn class="q-mr-sm" style="color: #767676;" flat label="Página inicial" />
-        <q-btn class="q-mr-sm" style="color: #767676;" flat label="Hoje" />
-        <q-btn class="q-mr-sm" style="color: #767676;" flat label="Seguindo" />
-        <q-input color="greey-12" outlined  borderless dense rounded standout v-model="text" input-class="text-right" class="q-ml-md">
+   <q-layout view="hHh Lpr lff" >
+      <q-header elevated class="bg-black">
+        <q-toolbar class="bg-white text-grey">
+          <q-btn v-if="smallWindowSize" flat @click="drawer = !drawer" round dense icon="menu" />
+          <q-btn v-if="!smallWindowSize"  class="q-mr-sm" style="color: #767676;" flat label="Página inicial" />
+          <q-btn v-if="!smallWindowSize"  class="q-mr-sm" style="color: #767676;" flat label="Hoje" />
+          <q-btn v-if="!smallWindowSize"  class="q-mr-sm" style="color: #767676;" flat label="Seguindo" />
+          <q-input color="greey-12" outlined  borderless dense rounded standout v-model="text" input-class="text-right" class="q-ml-md">
           <template v-slot:append>
             <q-icon v-if="text === ''" name="search" />
             <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''" />
@@ -14,12 +15,15 @@
         <q-space></q-space>
         <q-btn dark flat round dense icon="chat" class="q-mr-xs" />
         <q-btn flat round dense icon="logout" />
-      </q-toolbar>
-    </q-header>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+        </q-toolbar>
+      </q-header>
+      <Drawer :setDrawer="setDrawer" :drawer="drawer" />
+      <q-page-container>
+        <q-page padding>
+          <FeedCard/>
+        </q-page>
+      </q-page-container>
+    </q-layout>
 </template>
 
 <script>
@@ -68,15 +72,36 @@ const linksData = [
     link: 'https://awesome.quasar.dev'
   }
 ]
+import Drawer from 'components/Drawer.vue'
+import FeedCard from 'components/FeedCard.vue'
 
 export default {
+  components: {
+    Drawer,
+    FeedCard
+  },
 
-  name: 'MainLayout',
   data () {
     return {
-       text: '',
+      text: '',
+      drawer:false,
       leftDrawerOpen: false,
       essentialLinks: linksData
+    }
+  },
+  mounted () {
+
+  },
+  methods: {
+    setDrawer(value) {
+        this.drawer = value
+      }
+  },
+  computed: {
+    smallWindowSize () {
+      return this.$q.screen.lt.sm
+        ? true
+        : false
     }
   }
 }
