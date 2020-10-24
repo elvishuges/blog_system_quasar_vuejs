@@ -17,23 +17,13 @@
               </q-item-section>
             </q-item>
 
-            <q-item active clickable v-ripple>
-              <q-item-section avatar>
-                <q-icon name="star" />
-              </q-item-section>
-
-              <q-item-section>
-                Star
-              </q-item-section>
-            </q-item>
-
             <q-item clickable v-ripple>
               <q-item-section avatar>
                 <q-icon name="send" />
               </q-item-section>
 
               <q-item-section>
-                Send
+                Hoje
               </q-item-section>
             </q-item>
 
@@ -43,7 +33,7 @@
               </q-item-section>
 
               <q-item-section>
-                Drafts
+                Seguindo
               </q-item-section>
             </q-item>
           </q-list>
@@ -77,11 +67,14 @@ export default {
           set(value){
            return this.setDrawer(value)
           }
+      },
+      smallWindowSize () {
+        return this.$q.screen.lt.sm ? true : false
       }
   },
   watch: {
-       drawer (value) {
-          //return value;
+       smallWindowSize (value) {
+          this.setDrawer(false)
        }
     }
 }
