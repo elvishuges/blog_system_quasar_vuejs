@@ -4,7 +4,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/FeedLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/index.vue') }
+      { name: "feed", path: '', component: () => import('pages/index.vue') },
+      { name: "feedItem", path: '/feed/:feedId', component: () => import('pages/feedItemDetails.vue') }
     ]
   },
   {
